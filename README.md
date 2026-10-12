@@ -1,0 +1,2 @@
+# damla-aydin-portfolio
+Personal portfolio website built with Next.js
