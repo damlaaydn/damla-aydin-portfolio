@@ -237,7 +237,4 @@ export default function Home() {
     </div>
   );
 }
-npm run dev
-git add .
-git commit -m "Portfolyo ana sayfası güncellendi"
-git push
+
