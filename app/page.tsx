@@ -226,6 +226,46 @@ export default function Home() {
             <div className="project-visual cluster-visual"><ClusterVisual /></div>
             <div className="project-card-body"><div className="project-tags"><span>Makine öğrenmesi</span><span>K-Means</span></div><h3>K-Means ile Müşteri Segmentasyonu</h3><p>K-Means kümeleme algoritmasını temel alan müşteri segmentasyonu analizi çalışması.</p><div className="project-card-foot"><span>KÜMELEME · SEGMENTASYON</span><span className="project-arrow"><Icon name="arrow" size={17} /></span></div></div>
           </article>
+          <article className="project-card" data-reveal>
+            <div className="project-card-head">
+              <span className="project-number">PROJE / 03</span>
+              <span className="project-kind">VERİ HİKÂYESİ</span>
+            </div>
+            <div className="project-visual cluster-visual">
+              <svg className="project-visual-svg" viewBox="0 0 420 180" role="img" aria-label="Türkiye'nin elektrik üretim kaynaklarını temsil eden enerji görseli">
+                <defs>
+                  <pattern id="energy-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+                    <path d="M24 0H0V24" fill="none" stroke="currentColor" strokeOpacity=".08" strokeWidth="1" />
+                  </pattern>
+                  <linearGradient id="energy-line" x1="0" x2="1">
+                    <stop offset="0%" stopColor="#74dfc1" />
+                    <stop offset="100%" stopColor="#a0d7ff" />
+                  </linearGradient>
+                </defs>
+                <rect width="420" height="180" rx="14" fill="url(#energy-grid)" />
+                <path d="M35 143H390" stroke="currentColor" strokeOpacity=".18" />
+                <path d="M35 112 C75 104 90 124 130 96 S190 91 225 67 S285 80 320 48 S365 42 390 27" fill="none" stroke="url(#energy-line)" strokeWidth="3" strokeLinecap="round" />
+                <path d="M35 143 C75 135 95 143 130 126 S190 119 225 105 S285 110 320 91 S365 85 390 72" fill="none" stroke="#a0d7ff" strokeOpacity=".7" strokeWidth="2" strokeLinecap="round" />
+                <path d="M35 143H390V27 C365 42 345 51 320 48 S260 72 225 67 S165 82 130 96 S75 104 35 112Z" fill="#74dfc1" fillOpacity=".06" />
+                {[[35,112],[130,96],[225,67],[320,48],[390,27]].map(([x,y],i) => <circle key={i} cx={x} cy={y} r="4.5" fill="#74dfc1" stroke="#0e1b27" strokeWidth="2" />)}
+                <text x="35" y="164" fill="currentColor" opacity=".65" fontSize="10">2004</text>
+                <text x="365" y="164" fill="currentColor" opacity=".65" fontSize="10">2025</text>
+                <text x="35" y="18" fill="currentColor" opacity=".8" fontSize="10" letterSpacing="2">ENERJİ DÖNÜŞÜMÜ</text>
+              </svg>
+            </div>
+            <div className="project-card-body">
+              <div className="project-tags">
+                <span>Veri Görselleştirme</span>
+                <span>Enerji Analizi</span>
+              </div>
+              <h3>Türkiye'nin Enerji Dönüşümü</h3>
+              <p>Türkiye'nin elektrik üretiminde yenilenebilir enerji kaynaklarının yıllar içindeki değişimini etkileşimli grafikler ve veri hikâyesiyle inceliyorum.</p>
+              <div className="project-card-foot">
+                <a href="https://enerji-donusumu-hikayesi.vercel.app/" target="_blank" rel="noopener noreferrer">CANLI PROJEYİ İNCELE</a>
+                <a className="project-arrow" href="https://enerji-donusumu-hikayesi.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Enerji dönüşümü projesini yeni sekmede aç"><Icon name="arrow" size={17} /></a>
+              </div>
+            </div>
+          </article>
         </div>
         <p className="project-note"><span className="note-line" /> Proje görselleri kavramsal illüstrasyonlardır; sonuç grafiği veya ölçülmüş proje verisi değildir.</p>
       </section>
