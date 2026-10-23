@@ -1,240 +1,251 @@
-"use client";
+// Sayfanda kullanılan Icon ve bileşenler (Eğer varsa) import edilmeli. 
+// Hata vermemesi için React'in temel yapısını kuruyoruz.
 
-import { useEffect } from "react";
-import Head from "next/head";
+export default function Portfolio() {
+  // Sildiğin kısımlardaki eksikleri tamamlamak için örnek yetkinlikler dizisi
+  const skillGroups = [
+    { number: "01", title: "Veri Bilimi", subtitle: "Veri manipülasyonu ve analizi", skills: ["Python", "Pandas", "NumPy"] },
+    { number: "02", title: "Makine Öğrenmesi", subtitle: "Model geliştirme", skills: ["Scikit-learn", "K-Means", "XGBoost"] },
+    { number: "03", title: "Veritabanı & İş Zekası", subtitle: "Veri saklama ve görselleştirme", skills: ["SQL", "MongoDB", "Excel", "Power BI"] }
+  ];
 
-export default function Home() {
-  // Kaydırma animasyonları (Scroll Reveal) için IntersectionObserver
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("translate-y-0", "opacity-100");
-            entry.target.classList.remove("translate-y-12", "opacity-0");
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-
-    const hiddenElements = document.querySelectorAll(".data-reveal");
-    hiddenElements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
+  // Eksik bileşenlerin hata vermemesi için geçici tanımlamaları
+  const Icon = ({ name, size }) => <span style={{ fontSize: size }}>{name === "arrow" ? "→" : "•"}</span>;
+  const RouteVisual = () => <div className="bg-gray-200 w-full h-32 rounded-lg flex items-center justify-center">Rota Görseli</div>;
+  const ClusterVisual = () => <div className="bg-gray-200 w-full h-32 rounded-lg flex items-center justify-center">Kümeleme Görseli</div>;
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-200 font-sans selection:bg-teal-500 selection:text-white">
-      <Head>
-        <title>Damla Aydın | Portfolyo</title>
-        <meta name="description" content="Damla Aydın - Büyük Veri Analisti Portfolyosu" />
-      </Head>
-
-      {/* HEADER / NAVIGATION */}
-      <header className="fixed top-0 w-full bg-slate-950/80 backdrop-blur-md z-50 border-b border-slate-800">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="text-xl font-bold tracking-tighter text-white">
-            Damla<span className="text-teal-400">.</span>Aydın
-          </div>
-          <nav className="hidden md:flex space-x-8 text-sm font-medium">
-            <a href="#hakkimda" className="hover:text-teal-400 transition-colors">Hakkımda</a>
-            <a href="#deneyim" className="hover:text-teal-400 transition-colors">Deneyim</a>
-            <a href="#projeler" className="hover:text-teal-400 transition-colors">Projeler</a>
-            <a href="#yetenekler" className="hover:text-teal-400 transition-colors">Yetenekler</a>
-            <a href="#iletisim" className="hover:text-teal-400 transition-colors">İletişim</a>
-          </nav>
-        </div>
-      </header>
-
-      {/* HERO SECTION */}
-      <section id="hakkimda" className="pt-32 pb-20 px-6 max-w-6xl mx-auto min-h-screen flex flex-col justify-center">
-        <div className="data-reveal transition-all duration-1000 ease-out translate-y-12 opacity-0">
-          <p className="text-teal-400 font-mono mb-4 flex items-center gap-2">
-            <span className="w-8 h-[2px] bg-teal-400"></span> Merhaba, ben
-          </p>
-          <h1 className="text-5xl md:text-7xl font-extrabold text-white tracking-tight mb-4">
-            Damla Aydın.
-          </h1>
-          <h2 className="text-4xl md:text-6xl font-bold text-slate-400 mb-8">
-            Veriyi değere dönüştürüyorum.
-          </h2>
-          <p className="max-w-2xl text-lg text-slate-400 mb-10 leading-relaxed">
-            Manisa Celal Bayar Üniversitesi'nde Büyük Veri Analistliği öğrencisiyim. 
-            Makine öğrenmesi, veri görselleştirme ve iş zekâsı araçlarını kullanarak karmaşık veri 
-            kümelerinden anlamlı içgörüler ve optimizasyon modelleri çıkarıyorum. Üretim süreçlerinin veri odaklı yönetimi alanında kendimi geliştirmeye devam ediyorum.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <a href="#projeler" className="bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold py-3 px-8 rounded-lg transition-colors">
-              Projelerimi İncele
-            </a>
-            <a href="/cv-damla-aydin (1).pdf" target="_blank" rel="noopener noreferrer" className="bg-transparent border border-teal-500 text-teal-400 hover:bg-teal-500/10 font-bold py-3 px-8 rounded-lg transition-colors">
-              Özgeçmişimi İndir
-            </a>
-          </div>
-        </div>
+    <main>
+      {/* SİLİNEN ANA SAYFA / GİRİŞ KISMI (Eksik olmaması için eklendi) */}
+      <section className="content-section section-shell" id="anasayfa" style={{ padding: "100px 0" }}>
+        <h1>Damla Aydın</h1>
+        <p>Büyük Veri Analistliği Öğrencisi | Veri Bilimi & Makine Öğrenmesi</p>
       </section>
 
-      {/* EXPERIENCE SECTION */}
-      <section id="deneyim" className="py-20 px-6 max-w-4xl mx-auto">
-        <div className="data-reveal transition-all duration-1000 ease-out translate-y-12 opacity-0">
-          <h3 className="text-3xl font-bold text-white mb-10 flex items-center gap-4">
-            <span className="text-teal-400 font-mono text-xl">01.</span> Deneyim & Eğitim
-            <span className="flex-1 h-[1px] bg-slate-800 ml-4"></span>
-          </h3>
-          
-          <div className="space-y-12 border-l-2 border-slate-800 ml-4 pl-8 relative">
-            <div className="relative">
-              <span className="absolute -left-[41px] top-1 w-4 h-4 rounded-full bg-teal-500 border-4 border-slate-950"></span>
-              <h4 className="text-xl font-bold text-white">Veri Analisti Stajyeri</h4>
-              <p className="text-teal-400 font-medium mb-2">Toyo Matbaa Mürekkepleri (Artience Group)</p>
-              <p className="text-sm text-slate-400 mb-4">6 Temmuz 2026 - 3 Ağustos 2026</p>
-              <ul className="list-disc list-outside ml-4 text-slate-400 space-y-2">
-                <li>Power BI kullanarak yönetici, satış ve kârlılık analizlerine yönelik interaktif dashboardlar geliştirildi.</li>
-                <li>Veri modelleme yapılarak farklı tablolar arası ilişkiler kuruldu ve DAX ile iş ihtiyaçlarına uygun ölçüler geliştirildi.</li>
-                <li>KPI'lar, finansal göstergeler ve performans metrikleri üzerinden karar destek raporları hazırlandı.</li>
-              </ul>
-            </div>
-
-            <div className="relative">
-              <span className="absolute -left-[41px] top-1 w-4 h-4 rounded-full bg-slate-600 border-4 border-slate-950"></span>
-              <h4 className="text-xl font-bold text-white">Büyük Veri Analistliği</h4>
-              <p className="text-teal-400 font-medium mb-2">Manisa Celal Bayar Üniversitesi</p>
-              <p className="text-sm text-slate-400 mb-4">2025 - Halen | GANO: 3.07</p>
-              <ul className="list-disc list-outside ml-4 text-slate-400 space-y-2">
-                <li>Makine öğrenmesi, istatistiksel analiz, SQL/NoSQL veritabanları ve veri görselleştirme üzerine akademik eğitim.</li>
-                <li>Aktif Kulüp Üyeliği: Optimum Kulüp (Eğitim Ekibi)</li>
-                <li>Sosyal Sorumluluk: Manisa Özel Huzurevi Dijital Farkındalık Çalışması</li>
-              </ul>
-            </div>
+      {/* SENİN BANA ATTIĞIN PROJELER BÖLÜMÜ */}
+      <section className="content-section section-shell projects-section" id="projeler">
+        <div className="section-heading section-heading-row" data-reveal>
+          <div>
+            <div className="section-kicker"><span>03</span> SEÇİLİ ÇALIŞMALAR</div>
+            <h2>Analitik düşünce,<br /><span className="serif-accent">uygulamayla buluşur.</span></h2>
           </div>
+          <p className="heading-side-note">CV’de yer alan iki proje çalışması.</p>
         </div>
+        <div className="projects-grid">
+          <article className="project-card" data-reveal>
+            <div className="project-card-head"><span className="project-number">PROJE / 01</span><span className="project-kind">ARAŞTIRMA PROJESİ</span></div>
+            <div className="project-visual route-visual"><RouteVisual /></div>
+            <div className="project-card-body">
+              <div className="project-tags"><span>TÜBİTAK 2209-B</span><span>Optimizasyon</span></div>
+              <h3>Servis Araçları Rotalama Optimizasyonu</h3>
+              <p>Manisa’da bir asansör firmasının servis araçları rotalama optimizasyonu konulu araştırma projesi.</p>
+              <div className="project-card-foot"><span>ÜNİVERSİTE ÖĞRENCİLERİ ARAŞTIRMA PROJELERİ</span><span className="project-arrow"><Icon name="arrow" size={17} /></span></div>
+            </div>
+          </article>
+          <article className="project-card" data-reveal>
+            <div className="project-card-head"><span className="project-number">PROJE / 02</span><span className="project-kind">VERİ ANALİZİ</span></div>
+            <div className="project-visual cluster-visual"><ClusterVisual /></div>
+            <div className="project-card-body">
+              <div className="project-tags"><span>Makine öğrenmesi</span><span>K-Means</span></div>
+              <h3>K-Means ile Müşteri Segmentasyonu</h3>
+              <p>K-Means kümeleme algoritmasını temel alan müşteri segmentasyonu analizi çalışması.</p>
+              <div className="project-card-foot"><span>KÜMELEME · SEGMENTASYON</span><span className="project-arrow"><Icon name="arrow" size={17} /></span></div>
+            </div>
+          </article>
+          <article className="project-card" data-reveal>
+            <div className="project-card-head">
+              <span className="project-number">PROJE / 03</span>
+              <span className="project-kind">VERİ HİKÂYESİ</span>
+            </div>
+            <div className="project-visual cluster-visual">
+              <svg className="project-visual-svg" viewBox="0 0 420 180" role="img" aria-label="Türkiye'nin elektrik üretim kaynaklarını temsil eden enerji görseli">
+                <defs>
+                  <pattern id="energy-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+                    <path d="M24 0H0V24" fill="none" stroke="currentColor" strokeOpacity=".08" strokeWidth="1" />
+                  </pattern>
+                  <linearGradient id="energy-line" x1="0" x2="1">
+                    <stop offset="0%" stopColor="#74dfc1" />
+                    <stop offset="100%" stopColor="#a0d7ff" />
+                  </linearGradient>
+                </defs>
+                <rect width="420" height="180" rx="14" fill="url(#energy-grid)" />
+                <path d="M35 143H390" stroke="currentColor" strokeOpacity=".18" />
+                <path d="M35 112 C75 104 90 124 130 96 S190 91 225 67 S285 80 320 48 S365 42 390 27" fill="none" stroke="url(#energy-line)" strokeWidth="3" strokeLinecap="round" />
+                <path d="M35 143 C75 135 95 143 130 126 S190 119 225 105 S285 110 320 91 S365 85 390 72" fill="none" stroke="#a0d7ff" strokeOpacity=".7" strokeWidth="2" strokeLinecap="round" />
+                <path d="M35 143H390V27 C365 42 345 51 320 48 S260 72 225 67 S165 82 130 96 S75 104 35 112Z" fill="#74dfc1" fillOpacity=".06" />
+                {[[35,112],[130,96],[225,67],[320,48],[390,27]].map(([x,y],i) => <circle key={i} cx={x} cy={y} r="4.5" fill="#74dfc1" stroke="#0e1b27" strokeWidth="2" />)}
+                <text x="35" y="164" fill="currentColor" opacity=".65" fontSize="10">2004</text>
+                <text x="365" y="164" fill="currentColor" opacity=".65" fontSize="10">2025</text>
+                <text x="35" y="18" fill="currentColor" opacity=".8" fontSize="10" letterSpacing="2">ENERJİ DÖNÜŞÜMÜ</text>
+              </svg>
+            </div>
+            <div className="project-card-body">
+              <div className="project-tags">
+                <span>Veri Görselleştirme</span>
+                <span>Enerji Analizi</span>
+              </div>
+              <h3>Türkiye'nin Enerji Dönüşümü</h3>
+              <p>Türkiye'nin elektrik üretiminde yenilenebilir enerji kaynaklarının yıllar içindeki değişimini etkileşimli grafikler ve veri hikâyesiyle inceliyorum.</p>
+              <div className="project-card-foot">
+                <a href="https://enerji-donusumu-hikayesi.vercel.app/" target="_blank" rel="noopener noreferrer">CANLI PROJEYİ İNCELE</a>
+                <a className="project-arrow" href="https://enerji-donusumu-hikayesi.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Enerji dönüşümü projesini yeni sekmede aç"><Icon name="arrow" size={17} /></a>
+              </div>
+            </div>
+          </article>
+        </div>
+        <p className="project-note"><span className="note-line" /> Proje görselleri kavramsal illüstrasyonlardır; sonuç grafiği veya ölçülmüş proje verisi değildir.</p>
       </section>
 
-      {/* PROJECTS SECTION */}
-      <section id="projeler" className="py-20 px-6 max-w-6xl mx-auto">
-        <div className="data-reveal transition-all duration-1000 ease-out translate-y-12 opacity-0">
-          <h3 className="text-3xl font-bold text-white mb-12 flex items-center gap-4">
-            <span className="text-teal-400 font-mono text-xl">02.</span> Öne Çıkan Projeler
-            <span className="flex-1 h-[1px] bg-slate-800 ml-4"></span>
-          </h3>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Proje 1 */}
-            <div className="bg-slate-900 border border-slate-800 p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300 flex flex-col">
-              <div className="text-teal-400 mb-4">
-                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                </svg>
-              </div>
-              <h4 className="text-2xl font-bold text-white mb-3">TÜBİTAK 2209-B: Servis Araçları Rotalama Optimizasyonu</h4>
-              <p className="text-slate-400 mb-6 text-sm leading-relaxed">
-                TÜBİTAK 2209-B Sanayiye Yönelik Lisans Araştırma Projeleri Desteği kapsamında, Manisa'daki bir asansör bakım firması için Dinamik Karma Tam Sayılı Programlama (D-MIP) kullanılarak oluşturulan optimizasyon modeli.
-              </p>
-              <div className="flex flex-wrap gap-2 mt-auto">
-                <span className="text-xs font-mono text-teal-300 bg-teal-900/30 px-3 py-1 rounded-full">PuLP / OR-Tools</span>
-                <span className="text-xs font-mono text-teal-300 bg-teal-900/30 px-3 py-1 rounded-full">Matlab</span>
-                <span className="text-xs font-mono text-teal-300 bg-teal-900/30 px-3 py-1 rounded-full">TÜBİTAK 2209-B</span>
-              </div>
-            </div>
-
-            {/* Proje 2 */}
-            <div className="bg-slate-900 border border-slate-800 p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300 flex flex-col">
-              <div className="text-teal-400 mb-4">
-                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                </svg>
-              </div>
-              <h4 className="text-2xl font-bold text-white mb-3">K-Means Algoritması ile Müşteri Segmentasyonu</h4>
-              <p className="text-slate-400 mb-6 text-sm leading-relaxed">
-                Satış veri seti üzerinden PCA (Temel Bileşen Analizi) ve K-Means kümeleme algoritmaları kullanılarak gerçekleştirilen müşteri segmentasyonu analizi. Çıktılar interaktif bir Excel Dashboard'u ile görselleştirildi.
-              </p>
-              <div className="flex flex-wrap gap-2 mt-auto">
-                <span className="text-xs font-mono text-teal-300 bg-teal-900/30 px-3 py-1 rounded-full">K-Means</span>
-                <span className="text-xs font-mono text-teal-300 bg-teal-900/30 px-3 py-1 rounded-full">PCA</span>
-                <span className="text-xs font-mono text-teal-300 bg-teal-900/30 px-3 py-1 rounded-full">Excel Dashboard</span>
-              </div>
-            </div>
-
-            {/* Proje 3 */}
-            <div className="bg-slate-900 border border-slate-800 p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300 flex flex-col">
-              <div className="text-teal-400 mb-4">
-                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                </svg>
-              </div>
-              <h4 className="text-2xl font-bold text-white mb-3">Kestirimci Bakım Modeli (Predictive Maintenance)</h4>
-              <p className="text-slate-400 mb-6 text-sm leading-relaxed">
-                Endüstriyel ekipmanların arıza sürelerini tahmin etmek için döngüsel zaman dönüşümleri ve özellik mühendisliği (feature engineering) kullanılarak geliştirilmiş makine öğrenmesi projesi.
-              </p>
-              <div className="flex flex-wrap gap-2 mt-auto">
-                <span className="text-xs font-mono text-teal-300 bg-teal-900/30 px-3 py-1 rounded-full">Python</span>
-                <span className="text-xs font-mono text-teal-300 bg-teal-900/30 px-3 py-1 rounded-full">Scikit-learn</span>
-                <span className="text-xs font-mono text-teal-300 bg-teal-900/30 px-3 py-1 rounded-full">Pandas</span>
-              </div>
-            </div>
-            
-             {/* Proje 4 */}
-             <div className="bg-slate-900 border border-slate-800 p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300 flex flex-col">
-              <div className="text-teal-400 mb-4">
-                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
-                </svg>
-              </div>
-              <h4 className="text-2xl font-bold text-white mb-3">Lojistik Maliyet Tahminlemesi</h4>
-              <p className="text-slate-400 mb-6 text-sm leading-relaxed">
-                USAID tedarik zinciri fiyatlandırma verileri kullanılarak Python ve Excel üzerinde Çoklu Doğrusal Regresyon modeli tasarımı. Kapsamlı veri temizleme işlemleri gerçekleştirildi.
-              </p>
-              <div className="flex flex-wrap gap-2 mt-auto">
-                <span className="text-xs font-mono text-teal-300 bg-teal-900/30 px-3 py-1 rounded-full">Regression</span>
-                <span className="text-xs font-mono text-teal-300 bg-teal-900/30 px-3 py-1 rounded-full">Data Cleaning</span>
-                <span className="text-xs font-mono text-teal-300 bg-teal-900/30 px-3 py-1 rounded-full">Python</span>
-              </div>
-            </div>
+      <section className="content-section skills-section" id="yetkinlikler">
+        <div className="section-shell">
+          <div className="section-heading" data-reveal>
+            <div className="section-kicker"><span>04</span> YETKİNLİKLER</div>
+            <h2>Araçlarım değişir,<br /><span className="serif-accent">öğrenme merakım kalır.</span></h2>
+            <p className="section-description">CV’mde yer alan teknik beceriler ve çalışma araçları.</p>
           </div>
-        </div>
-      </section>
-
-      {/* SKILLS SECTION */}
-      <section id="yetenekler" className="py-20 px-6 max-w-4xl mx-auto">
-        <div className="data-reveal transition-all duration-1000 ease-out translate-y-12 opacity-0">
-          <h3 className="text-3xl font-bold text-white mb-10 flex items-center gap-4">
-            <span className="text-teal-400 font-mono text-xl">03.</span> Teknik Yetkinlikler
-            <span className="flex-1 h-[1px] bg-slate-800 ml-4"></span>
-          </h3>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-            {['Python', 'Power BI (DAX)', 'İleri Düzey Excel', 'SQL / MongoDB', 'C#', 'Microsoft Visio', 'İngilizce (B1)', 'Next.js & Tailwind'].map((skill, index) => (
-              <div key={index} className="bg-slate-900 border border-slate-800 rounded-lg p-4 font-medium text-slate-300 hover:border-teal-500 hover:text-teal-400 transition-colors">
-                {skill}
-              </div>
+          <div className="skill-groups">
+            {skillGroups.map((group) => (
+              <article className="skill-group" data-reveal key={group.number}>
+                <div className="skill-group-top">
+                  <span className="skill-number">{group.number}</span>
+                  <span className="skill-group-mark"><Icon name="spark" size={17} /></span>
+                </div>
+                <h3>{group.title}</h3>
+                <p>{group.subtitle}</p>
+                <div className="skill-chips">{group.skills.map((skill) => <span className="skill-chip" key={skill}>{skill}</span>)}</div>
+              </article>
             ))}
           </div>
+          <div className="language-card" data-reveal>
+            <div className="language-left">
+              <span className="language-icon">Aa</span>
+              <div>
+                <span className="micro-label">YABANCI DİL</span>
+                <h3>İngilizce</h3>
+                <p>Intermediate</p>
+              </div>
+            </div>
+            <div className="language-right">
+              <span className="language-level">B1</span>
+              <div className="language-meter" aria-label="İngilizce seviyesi B1"><span /></div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* CONTACT SECTION */}
-      <section id="iletisim" className="py-32 px-6 max-w-2xl mx-auto text-center">
-        <div className="data-reveal transition-all duration-1000 ease-out translate-y-12 opacity-0">
-          <h3 className="text-teal-400 font-mono text-lg mb-4">04. Sırada Ne Var?</h3>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">İletişime Geçin</h2>
-          <p className="text-slate-400 text-lg mb-10 leading-relaxed">
-            Şu anda yeni staj ve proje fırsatlarına açığım. Veri odaklı projeleriniz hakkında konuşmak, 
-            bir soru sormak veya sadece merhaba demek isterseniz bana ulaşabilirsiniz.
-          </p>
-          <a href="mailto:damlaaydiin7@gmail.com" className="inline-block border border-teal-400 text-teal-400 hover:bg-teal-400/10 font-bold py-4 px-10 rounded-lg transition-colors">
-            E-posta Gönder
-          </a>
+      <section className="content-section section-shell education-section" id="egitim">
+        <div className="education-layout">
+          <div className="education-column" data-reveal>
+            <div className="section-kicker"><span>05</span> EĞİTİM</div>
+            <h2>Temelden<br /><span className="serif-accent">ileriye.</span></h2>
+            <div className="education-timeline">
+              <article className="education-item current">
+                <span className="education-point" />
+                <div className="education-date">2025 — DEVAM EDİYOR</div>
+                <h3>Manisa Celal Bayar Üniversitesi</h3>
+                <p>Büyük Veri Analistliği</p>
+                <span className="education-badge">GANO · 3.07</span>
+              </article>
+              <article className="education-item">
+                <span className="education-point" />
+                <div className="education-date">2021 — 2025</div>
+                <h3>İzmir İnönü Anadolu Lisesi</h3>
+                <p>Lise eğitimi</p>
+              </article>
+            </div>
+          </div>
+          <div className="certificates-column" data-reveal>
+            <div className="section-kicker"><span>06</span> SERTİFİKALAR</div>
+            <h2>Bilgiyi sürekli<br /><span className="serif-accent">güncel tutmak.</span></h2>
+            <div className="certificate-list">
+              <article className="certificate-item">
+                <span className="certificate-icon"><Icon name="check" size={16} /></span>
+                <div><h3>Introduction to Data Science</h3><p>AYEUM</p></div>
+                <span className="certificate-index">01</span>
+              </article>
+              <article className="certificate-item">
+                <span className="certificate-icon"><Icon name="check" size={16} /></span>
+                <div><h3>Veri Ön İşleme Eğitimi</h3><p>Turkcell Akademi</p></div>
+                <span className="certificate-index">02</span>
+              </article>
+              <article className="certificate-item">
+                <span className="certificate-icon"><Icon name="check" size={16} /></span>
+                <div><h3>TÜBİTAK 2209 Projeleri Semineri</h3><p>Manisa Celal Bayar Üniversitesi</p></div>
+                <span className="certificate-index">03</span>
+              </article>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="text-center py-6 text-slate-500 text-sm font-mono border-t border-slate-900 mt-20">
-        <p>Tasarım ve Geliştirme: Damla Aydın &copy; {new Date().getFullYear()}</p>
-        <p className="mt-2 text-xs opacity-60">Next.js & Tailwind CSS ile oluşturulmuştur.</p>
+      <section className="community-strip section-shell" data-reveal>
+        <div className="community-symbol"><Icon name="spark" size={21} /></div>
+        <div className="community-copy">
+          <span className="section-kicker">TOPLULUK & GÖNÜLLÜLÜK</span>
+          <h2>Bilgiyi paylaşmak, birlikte gelişmek.</h2>
+          <p><strong>Optimum Kulüp</strong> · Eğitim Ekibi Aktif Üye <span className="community-separator">/</span> <strong>Manisa Özel Huzurevi Vakfı</strong> · Yaşlılar için dijital farkındalık çalışması</p>
+        </div>
+        <span className="community-outline">WITH PURPOSE</span>
+      </section>
+
+      {/* İŞTE ÇALIŞAN İLETİŞİM FORMUN BURADA */}
+      <section className="contact-section" id="iletisim">
+        <div className="section-shell contact-layout">
+          <div className="contact-copy" data-reveal>
+            <div className="section-kicker"><span>07</span> İLETİŞİM</div>
+            <h2>Bir fikirle<br />başlayalım<span className="headline-period">.</span></h2>
+            <p>Staj, iş birliği veya veri analitiği üzerine bir sohbet için bana ulaşabilirsiniz.</p>
+            <a className="contact-email" href="mailto:damlaaydiin7@gmail.com">
+              <span><Icon name="mail" size={18} /></span> damlaaydiin7@gmail.com <Icon name="arrow" size={16} />
+            </a>
+            <div className="contact-details">
+              <div><Icon name="pin" size={16} /><span>İzmir, Türkiye</span></div>
+              <div><Icon name="phone" size={16} /><a href="tel:+905308506973">+90 530 850 69 73</a></div>
+            </div>
+            <div className="contact-endnote"><span className="availability-dot" /> Yeni bağlantılara ve öğrenme fırsatlarına açığım.</div>
+          </div>
+          
+          {/* FORMSUBMIT BAĞLANTISI BURAYA EKLENDİ */}
+          <form className="contact-form" action="https://formsubmit.co/damlaaydiin7@gmail.com" method="POST" data-reveal>
+            <div className="form-heading"><span className="micro-label">BİR MESAJ BIRAKIN</span><span className="form-heading-mark"><Icon name="arrow" size={17} /></span></div>
+            
+            <input type="hidden" name="_captcha" value="false" />
+            
+            <label htmlFor="contact-name">Adınız</label>
+            <input id="contact-name" name="name" type="text" placeholder="Adınız soyadınız" autoComplete="name" required />
+            
+            <label htmlFor="contact-email">E-posta adresiniz</label>
+            <input id="contact-email" name="email" type="email" placeholder="ornek@eposta.com" autoComplete="email" required />
+            
+            <label htmlFor="contact-subject">Konu</label>
+            <input id="contact-subject" name="subject" type="text" placeholder="Mesajınızın konusu" required />
+            
+            <label htmlFor="contact-message">Mesajınız</label>
+            <textarea id="contact-message" name="message" rows={4} placeholder="Size nasıl yardımcı olabilirim?" required maxLength={5000} />
+
+            <label className="contact-consent" htmlFor="contact-kvkk">
+              <input id="contact-kvkk" type="checkbox" name="kvkk" required />
+              <span>İletişim talebime yanıt verilmesi amacıyla bilgilerimin işlenmesine ilişkin aydınlatma metnini okudum.</span>
+            </label>
+
+            <button type="submit" className="button button-primary form-submit">
+              Mesajı gönder
+              <Icon name="arrow" size={17} />
+            </button>
+
+            <p className="form-privacy">Mesajınız Formsubmit aracılığıyla doğrudan e-posta adresinize iletilecektir.</p>
+          </form>
+        </div>
+      </section>
+
+      <footer className="site-footer">
+        <div className="section-shell footer-inner">
+          <a className="footer-brand" href="#anasayfa"><span className="brand-mark">d<span>.</span></span><span>Damla Aydın</span></a>
+          <p>Veriyi anlamak. İçgörü üretmek. Gelişmeye devam etmek.</p>
+          <a className="back-to-top" href="#anasayfa">Başa dön <span>↑</span></a>
+          <span className="footer-copyright">© {new Date().getFullYear()} DAMLA AYDIN</span>
+        </div>
       </footer>
-    </div>
+    </main>
   );
 }
-

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useState } from "react";
 
 type IconName = "arrow" | "download" | "spark" | "menu" | "close" | "mail" | "phone" | "pin" | "external" | "check" | "chart";
 
@@ -84,7 +84,6 @@ function ClusterVisual() {
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [formSent, setFormSent] = useState(false);
 
   useEffect(() => {
     const elements = document.querySelectorAll<HTMLElement>("[data-reveal]");
@@ -105,19 +104,6 @@ export default function Home() {
   }, []);
 
   const closeMenu = () => setMenuOpen(false);
-
-  function handleContactSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const form = new FormData(event.currentTarget);
-    const name = String(form.get("name") ?? "").trim();
-    const email = String(form.get("email") ?? "").trim();
-    const subject = String(form.get("subject") ?? "").trim();
-    const message = String(form.get("message") ?? "").trim();
-    const body = [`Ad Soyad: ${name}`, `E-posta: ${email}`, "", message].join("\n");
-    const mailto = `mailto:damlaaydiin7@gmail.com?subject=${encodeURIComponent(subject || `Portfolyo iletişimi - ${name}`)}&body=${encodeURIComponent(body)}`;
-    setFormSent(true);
-    window.location.href = mailto;
-  }
 
   return (
     <main>
@@ -292,15 +278,26 @@ export default function Home() {
       <section className="contact-section" id="iletisim">
         <div className="section-shell contact-layout">
           <div className="contact-copy" data-reveal><div className="section-kicker"><span>07</span> İLETİŞİM</div><h2>Bir fikirle<br />başlayalım<span className="headline-period">.</span></h2><p>Staj, iş birliği veya veri analitiği üzerine bir sohbet için bana ulaşabilirsiniz.</p><a className="contact-email" href="mailto:damlaaydiin7@gmail.com"><span><Icon name="mail" size={18} /></span> damlaaydiin7@gmail.com <Icon name="arrow" size={16} /></a><div className="contact-details"><div><Icon name="pin" size={16} /><span>İzmir, Türkiye</span></div><div><Icon name="phone" size={16} /><a href="tel:+905308506973">+90 530 850 69 73</a></div></div><div className="contact-endnote"><span className="availability-dot" /> Yeni bağlantılara ve öğrenme fırsatlarına açığım.</div></div>
-          <form className="contact-form" onSubmit={handleContactSubmit} data-reveal>
+          
+          <form className="contact-form" action="https://formsubmit.co/damlaaydiin7@gmail.com" method="POST" data-reveal>
             <div className="form-heading"><span className="micro-label">BİR MESAJ BIRAKIN</span><span className="form-heading-mark"><Icon name="arrow" size={17} /></span></div>
-            <label htmlFor="contact-name">Adınız</label><input id="contact-name" name="name" type="text" placeholder="Adınız soyadınız" autoComplete="name" required />
-            <label htmlFor="contact-email">E-posta adresiniz</label><input id="contact-email" name="email" type="email" placeholder="ornek@eposta.com" autoComplete="email" required />
-            <label htmlFor="contact-subject">Konu</label><input id="contact-subject" name="subject" type="text" placeholder="Mesajınızın konusu" required />
-            <label htmlFor="contact-message">Mesajınız</label><textarea id="contact-message" name="message" rows={4} placeholder="Size nasıl yardımcı olabilirim?" required />
-            <button type="submit" className="button button-primary form-submit">E-posta ile gönder <Icon name="arrow" size={17} /></button>
-            <p className="form-privacy">Gönder düğmesi, e-posta uygulamanızda doldurulmuş bir taslak açar. Mesajınız bu web sitesinde saklanmaz.</p>
-            {formSent && <p className="form-status" role="status">E-posta taslağı açılmadıysa <a href="mailto:damlaaydiin7@gmail.com">buradan doğrudan e-posta gönderin.</a></p>}
+            
+            <input type="hidden" name="_captcha" value="false" />
+            
+            <label htmlFor="contact-name">Adınız</label>
+            <input id="contact-name" name="name" type="text" placeholder="Adınız soyadınız" autoComplete="name" required />
+            
+            <label htmlFor="contact-email">E-posta adresiniz</label>
+            <input id="contact-email" name="email" type="email" placeholder="ornek@eposta.com" autoComplete="email" required />
+            
+            <label htmlFor="contact-subject">Konu</label>
+            <input id="contact-subject" name="subject" type="text" placeholder="Mesajınızın konusu" required />
+            
+            <label htmlFor="contact-message">Mesajınız</label>
+            <textarea id="contact-message" name="message" rows={4} placeholder="Size nasıl yardımcı olabilirim?" required />
+            
+            <button type="submit" className="button button-primary form-submit">Mesajı gönder <Icon name="arrow" size={17} /></button>
+            <p className="form-privacy">Mesajınız Formsubmit aracılığıyla doğrudan e-posta adresime iletilecektir.</p>
           </form>
         </div>
       </section>
