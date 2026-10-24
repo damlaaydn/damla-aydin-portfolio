@@ -10,7 +10,13 @@ export default function Portfolio() {
   ];
 
   // Eksik bileşenlerin hata vermemesi için geçici tanımlamaları
-  const Icon = ({ name, size }) => <span style={{ fontSize: size }}>{name === "arrow" ? "→" : "•"}</span>;
+  
+const Icon = ({ name, size }: { name: string; size: number }) => (
+  <span style={{ fontSize: size }}>
+    {name === "arrow" ? "→" : "•"}
+  </span>
+);
+
   const RouteVisual = () => <div className="bg-gray-200 w-full h-32 rounded-lg flex items-center justify-center">Rota Görseli</div>;
   const ClusterVisual = () => <div className="bg-gray-200 w-full h-32 rounded-lg flex items-center justify-center">Kümeleme Görseli</div>;
 
